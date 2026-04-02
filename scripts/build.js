@@ -35,20 +35,6 @@ try {
     { stdio: 'inherit', cwd: path.join(__dirname, '..') }
   );
   console.log(`\nBinary written to: ${outFile}`);
-
-  // macOS requires code signing — ad-hoc sign so Gatekeeper doesn't kill it
-  if (platform === 'darwin') {
-    console.log('Ad-hoc signing binary for macOS...');
-    try {
-      execSync(`codesign --sign - --force "${outFile}"`, { stdio: 'inherit' });
-      console.log('Signed successfully.');
-    } catch (e) {
-      console.warn(
-        '\nWarning: codesign failed. macOS may kill the binary.\n' +
-        `Run manually: codesign --sign - --force "${outFile}"`
-      );
-    }
-  }
 } catch (e) {
   process.exit(1);
 }

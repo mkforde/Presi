@@ -131,18 +131,6 @@ function runFontViewer() {
     renderFont(currentFontIndex);
   });
 
-  sidebar.key(['up', 'k'], () => {
-    currentFontIndex = Math.max(0, currentFontIndex - 1);
-    sidebar.select(currentFontIndex);
-    renderFont(currentFontIndex);
-  });
-
-  sidebar.key(['down', 'j'], () => {
-    currentFontIndex = Math.min(FONT_NAMES.length - 1, currentFontIndex + 1);
-    sidebar.select(currentFontIndex);
-    renderFont(currentFontIndex);
-  });
-
   screen.key(['q', 'C-c', 'escape'], () => process.exit(0));
   screen.on('resize', () => renderFont(currentFontIndex));
 

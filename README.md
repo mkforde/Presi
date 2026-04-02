@@ -8,15 +8,45 @@ Built with [blessed](https://github.com/chjj/blessed) (Node.js TUI library) and 
 
 ## Installation
 
-Download the pre-built binary from releases, or build from source:
+Requires [Node.js](https://nodejs.org) 18+. The build script auto-detects your platform.
 
 ```bash
 git clone https://github.com/mkforde/presi
 cd presi
 npm install
-npm run build         # produces dist/presi (linux x64)
-sudo cp dist/presi /usr/local/bin/presi
+npm run build           # auto-detects platform → dist/presi
 ```
+
+Then put the binary on your PATH:
+
+```bash
+# Linux / macOS (writable /usr/local/bin)
+sudo cp dist/presi /usr/local/bin/presi
+
+# or into a user-local bin (no sudo needed)
+mkdir -p ~/.local/bin
+cp dist/presi ~/.local/bin/presi   # make sure ~/.local/bin is in your PATH
+
+# one-step build + install (tries ~/.local/bin then ~/bin as fallback)
+npm run install-bin
+```
+
+**Or run without compiling** (Node.js must be installed):
+
+```bash
+node src/index.js --help
+# add a shell alias for convenience:
+alias presi="node $(pwd)/src/index.js"
+```
+
+### Platform-specific build targets
+
+| Platform | Command |
+|---|---|
+| Linux x64 (default) | `npm run build:linux` |
+| macOS Apple Silicon | `npm run build:mac` |
+| macOS Intel | `npm run build:mac-x64` |
+| All three | `npm run build:all` |
 
 ---
 

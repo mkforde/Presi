@@ -8,8 +8,9 @@ function runPresentation(filePath, presentation) {
   const { slides, style } = presentation;
   const socketPath = getSocketPath(filePath);
 
-  // Start sync server so speaker notes can connect
-  const server = new SyncServer(socketPath);
+  // Start sync server so speaker notes can connect.
+  // onSlide callback lets the speaker drive navigation in this window.
+  const server = new SyncServer(socketPath, (index) => goTo(index));
   server.start();
 
   let currentIndex = 0;

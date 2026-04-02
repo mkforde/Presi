@@ -13,11 +13,12 @@ function getSocketPath(filePath) {
 
 // Server side: main presentation creates and manages this
 class SyncServer {
-  constructor(socketPath) {
+  constructor(socketPath, onSlide) {
     this.socketPath = socketPath;
     this.clients = new Set();
     this.currentIndex = 0;
     this.server = null;
+    this.onSlide = onSlide; // called when speaker pushes a nav change
   }
 
   start() {
@@ -26,9 +27,26 @@ class SyncServer {
 
     this.server = net.createServer((socket) => {
       this.clients.add(socket);
+      let buf = '';
 
       // Send current state immediately on connect
       this._send(socket, { type: 'slide', index: this.currentIndex });
+
+      // Accept nav pushes FROM clients (speaker controlling main)
+      socket.on('data', (data) => {
+        buf += data.toString();
+        const lines = buf.split('\n');
+        buf = lines.pop();
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          try {
+            const msg = JSON.parse(line);
+            if (msg.type === 'slide' && typeof msg.index === 'number') {
+              if (this.onSlide) this.onSlide(msg.index);
+            }
+          } catch (_) {}
+        }
+      });
 
       socket.on('close', () => this.clients.delete(socket));
       socket.on('error', () => this.clients.delete(socket));
@@ -100,6 +118,12 @@ class SyncClient {
     this.socket.on('close', () => {
       this.connected = false;
     });
+  }
+
+  send(obj) {
+    if (this.socket && this.connected) {
+      try { this.socket.write(JSON.stringify(obj) + '\n'); } catch (_) {}
+    }
   }
 
   disconnect() {

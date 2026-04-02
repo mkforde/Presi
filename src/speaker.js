@@ -192,17 +192,19 @@ function runSpeaker(filePath, presentation) {
     }
   );
 
-  // Allow manual navigation in speaker view too
+  // Navigate from speaker view — pushes to main presentation via server
   screen.key(['right', 'space', 'down'], () => {
     if (currentIndex < slides.length - 1) {
       currentIndex++;
       renderSlide(currentIndex);
+      client.send({ type: 'slide', index: currentIndex });
     }
   });
   screen.key(['left', 'backspace', 'up'], () => {
     if (currentIndex > 0) {
       currentIndex--;
       renderSlide(currentIndex);
+      client.send({ type: 'slide', index: currentIndex });
     }
   });
   screen.key(['q', 'C-c', 'escape'], () => {

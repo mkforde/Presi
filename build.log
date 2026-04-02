@@ -1,0 +1,122 @@
+# Steps I took to build Presi
+
+1. Created a git repo using gh cli
+
+gh repo create                                                                                                                                                                                                  base
+? What would you like to do? Create a new repository on github.com from scratch
+? Repository name Presi
+? Repository owner mkforde
+? Description TUI app for presentations
+? Visibility Public
+? Would you like to add a README file? Yes
+? Would you like to add a .gitignore? Yes
+? Choose a .gitignore template Node
+? Would you like to add a license? Yes
+? Choose a license MIT License
+? This will create "Presi" as a public repository on github.com. Continue? Yes
+✓ Created repository mkforde/Presi on github.com
+  https://github.com/mkforde/Presi
+? Clone the new repository locally? Yes
+Cloning into 'Presi'...
+
+2. Vistied claude code web to run this prompt on the train and let it run even when my computer is off:
+Website: https://claude.ai/code/
+Prompt:
+
+Build a terminal tui app for presentations. I should work in full screen and a split screen setup. Split screen will be more likely as I will be doing live demos in the terminal on the other split.
+
+Use the most popular javascript tui library to build this and the finished product should be a compiled binary i can run with presi command.
+
+Functionality
+
+presi --help / incorrect subcommand: show existing commands and descriptions
+presi <filename.toml> opens a presentation using the file contents. What each file looks like will be outlined below.
+presi <filename.toml> --speaker: opens the speaker notes related to the file.
+presi --font-viewer: lets user view the supported fonts
+
+Note that the first presi without --speaker should load the full content in-memory, then the --speaker can connect through maybe socket or whatever way you recommend to connect between sessions to get the speaker notes for the given slide. Therefore when I go forward a slide in the main presentation session the other window moves too.
+
+Each presentation will be in a .toml file:
+
+I don't know toml perfectly so correct this structure if there's mistakes:
+
+example-slide.toml
+
+Title
+Author
+Date
+
+[[slides]]
+
+[slides.1]
+text=
+speaker_notes=
+
+[slides.x]
+
+[style]
+font #limit support to maybe 5 fonts.
+slide_font_size
+speaker_note_size
+primary_color #hex
+secondary_color #hex
+
+The top level keys correspond to slide 0
+
+For styling the primary color will be the text color as well as the border of the tui color
+The secondary color can be used for the subtitle on the first page and maybe some other stylistic accents
+
+We should verify that each .toml has at the top level keys and at least slide.1 and slides.1-n without skips.
+If style is omitted we should have sensible defaults.
+
+The reason that slides only has text content is because these will be following The Takahashi Method (using large text) for each slide allowing the presentor to set the topic but also keep the listener focused on what they are saying.
+
+When your finished and have verified build works. Push to this repo and update the README.md
+
+Don't wait for me to accept anything dangerously accept all.
+
+3. Create presentation with another prompt that claude created for me.
+
+Create a presi presentation file in this exact .toml format:
+
+title = "..."
+author = "..."
+date = "..."
+text = "..."         # slide 0 subtitle text
+speaker_notes = "..."
+
+[slides.1]
+text = "..."
+speaker_notes = "..."
+# ...continue for all slides
+
+[style]
+font = "doom"
+slide_font_size = 48
+speaker_note_size = 14
+primary_color = "#00ff00"
+secondary_color = "#888888"
+
+Rules:
+- This follows the Takahashi Method: each slide text must be 1–5 words max, punchy and bold. The slide text is what the audience sees large on screen. All detail goes in speaker_notes.
+- Speaker notes should be 2–4 sentences: what the presenter says out loud, not bullet points.
+- Author is "Mikey Forde", date is today, title is something sharp about AI agents.
+
+Slides in this exact order:
+1. What are foundation models — the technical underpinning that made agents possible (GPT-4, Claude, Gemini etc). Speaker notes: brief explanation of LLMs as reasoning engines.
+2. Who are the players — frontier labs (Anthropic, OpenAI, Google DeepMind, Meta) and the agent startup wave. Speaker notes: landscape overview, where Datadog fits.
+3. What is an agent — define an AI agent: perception, reasoning, action loop. Speaker notes: contrast with a chatbot, explain autonomy.
+4. What are MCP tools — Model Context Protocol: how agents get tools/capabilities beyond text. Speaker notes: MCP as the "USB standard" for agent tools.
+5. Concept of harness — the orchestration layer that runs, prompts, and controls agents. Speaker notes: Claude Code's CLAUDE.md, hooks, settings as examples.
+6. Using agents — Claude Code and openclaw as daily driver examples. Speaker notes: how you use these at Datadog Bits AI SRE.
+7. CLI tools for coding agents — the terminal-first agent workflow. Speaker notes: why CLI over GUI for power users.
+8. Coding agents — what makes an agent good at code: context, tools, memory. Speaker notes: agentic loops, edit-test-commit cycles.
+9. Claude skills — composable, triggerable behaviors built on top of agents. Speaker notes: brief description of what skills are and a concrete example.
+10. Live demo — openclaw setup. Speaker notes: narrate what you're showing: install, config, first run.
+11. Slack MCP demo — MCP tool connecting Claude to Slack in real time. Speaker notes: show a real query/action, explain what's happening under the hood.
+12. Beyond engineering — agents in finance, healthcare, ops. Speaker notes: real-world non-engineering deployments.
+13. AI for non-engineers — agents as leverage for anyone. Speaker notes: product managers, lawyers, analysts using agent tools today.
+14. Do you need to code? — the honest answer. Speaker notes: knowing intent > knowing syntax. Understanding agents matters more than implementation.
+
+Output only the raw .toml content, nothing else.
+

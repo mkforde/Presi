@@ -1,0 +1,68 @@
+title = "The Age of AI Agents"
+author = "Mikey Forde"
+date = "2026-04-02"
+text = "AI Agents in 2026"
+speaker_notes = "Today we're going to move fast through the full landscape of AI agents — what they are, how they work, how I use them daily, and why they matter to everyone in this room regardless of whether you write code."
+
+[slides.1]
+text = "Foundation Models"
+speaker_notes = "Foundation models like GPT-4, Claude, and Gemini are large language models trained on vast amounts of text to act as general-purpose reasoning engines. Unlike narrow AI, they can read, write, reason, and plan across almost any domain. They are the substrate that makes agents possible — think of them as the brain before you give it hands."
+
+[slides.2]
+text = "Who's Building This"
+speaker_notes = "The frontier labs — Anthropic, OpenAI, Google DeepMind, and Meta — are racing to build the most capable foundation models. On top of them, a wave of agent startups is emerging to tackle specific verticals. Datadog sits in this landscape as both a consumer and a target use case: infrastructure that agents need to observe and operate."
+
+[slides.3]
+text = "What Is An Agent"
+speaker_notes = "An AI agent is a system that perceives its environment, reasons about what to do, takes action, and then observes the result — looping until the goal is achieved. This is fundamentally different from a chatbot, which just responds. An agent has autonomy: it can plan across multiple steps, use tools, and self-correct."
+
+[slides.4]
+text = "MCP Tools"
+speaker_notes = "Model Context Protocol is an open standard that lets agents connect to external tools and data sources — databases, APIs, filesystems, Slack, and more. Think of it as the USB standard for agent capabilities: any compliant tool can plug into any compliant agent. It's what turns a reasoning engine into something that can actually do work."
+
+[slides.5]
+text = "The Harness"
+speaker_notes = "A harness is the orchestration layer that wraps an agent — it sets the context, defines the rules, wires up the tools, and controls how the agent behaves. In Claude Code, the harness is CLAUDE.md, hooks, and settings.json: files that tell the agent who it is, what it's allowed to do, and how to respond to events. The harness is where engineering judgment lives."
+
+[slides.6]
+text = "Using Agents Daily"
+speaker_notes = "I use Claude Code and openclaw as my daily drivers on the Bits AI SRE team at Datadog. These aren't toys — they handle real tasks: writing and reviewing code, navigating unfamiliar repos, drafting runbooks, and wiring up integrations. The workflow is agentic: I state intent, the agent executes, I review and guide."
+
+[slides.7]
+text = "CLI-First Workflow"
+speaker_notes = "Terminal-first agent tooling is faster and more composable than GUI-based tools. You get scripting, piping, and integration with your existing shell environment. For power users, the CLI removes friction and lets the agent live inside the same environment where the work happens — no context switching, no copy-paste."
+
+[slides.8]
+text = "Coding Agents"
+speaker_notes = "A great coding agent needs three things: rich context about the codebase, the right tools to read and write files and run tests, and memory across the session. The agentic loop — read, edit, test, commit — mirrors how a senior engineer works, but at machine speed. The agent isn't autocomplete; it's a collaborator that owns tasks end to end."
+
+[slides.9]
+text = "Claude Skills"
+speaker_notes = "Skills are composable, triggerable behaviors you build on top of Claude Code — named prompts that the agent knows how to invoke. For example, a commit skill that writes a structured git message, or a review-pr skill that checks a pull request against your team's standards. They're the reusable building blocks of an agentic workflow."
+
+[slides.10]
+text = "Live: openclaw"
+speaker_notes = "We're going to walk through openclaw live: install it, drop in a config, and run a first command. Watch how the harness initializes, how the agent picks up context from the environment, and how it starts executing against a real task. This is the stack I use every day."
+
+[slides.11]
+text = "Live: Slack MCP"
+speaker_notes = "Now let's connect Claude to Slack via an MCP tool in real time. I'll issue a natural language query and you'll see the agent translate it into a Slack API call, retrieve results, and reason over them. Under the hood, MCP is handling auth, schema, and the tool call format — Claude just decides when and how to use it."
+
+[slides.12]
+text = "Beyond Engineering"
+speaker_notes = "Agents are already deployed in finance for document review and trade analysis, in healthcare for clinical note summarization, and in operations for incident triage. These aren't demos — they're in production. The engineering patterns we've talked about today are the same ones powering these systems."
+
+[slides.13]
+text = "Not Just For Engineers"
+speaker_notes = "Product managers are using agents to synthesize user feedback at scale. Lawyers are using them for contract review. Analysts are running research pipelines that used to take weeks. The leverage is enormous for anyone who works with information — which is almost everyone. You don't need to be technical to benefit from this shift."
+
+[slides.14]
+text = "Do You Need To Code?"
+speaker_notes = "The honest answer: no, but understanding matters. Knowing what an agent can and can't do, how to give it intent clearly, and when to trust its output — that's worth more than knowing the syntax. The people who will get the most from this technology are the ones who understand it well enough to direct it. That's what today was about."
+
+[style]
+font = "doom"
+slide_font_size = 48
+speaker_note_size = 14
+primary_color = "#00ff00"
+secondary_color = "#888888"

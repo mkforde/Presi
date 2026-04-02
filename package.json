@@ -1,0 +1,39 @@
+{
+  "name": "presi",
+  "version": "1.0.0",
+  "description": "Takahashi Method terminal presentation tool",
+  "main": "src/index.js",
+  "bin": {
+    "presi": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "build": "node scripts/build.js",
+    "build:linux": "pkg . --targets node22-linux-x64 --output dist/presi --compress GZip",
+    "build:mac": "pkg . --targets node22-macos-arm64 --output dist/presi --compress GZip",
+    "build:mac-x64": "pkg . --targets node22-macos-x64 --output dist/presi --compress GZip",
+    "build:all": "pkg . --targets node22-linux-x64,node22-macos-arm64,node22-macos-x64 --output dist/presi --compress GZip",
+    "install-bin": "node scripts/build.js && node scripts/install.js"
+  },
+  "dependencies": {
+    "@iarna/toml": "^2.2.5",
+    "blessed": "^0.1.81",
+    "commander": "^11.1.0",
+    "figlet": "^1.7.0"
+  },
+  "devDependencies": {
+    "@yao-pkg/pkg": "^5.12.0"
+  },
+  "pkg": {
+    "assets": [
+      "node_modules/figlet/fonts/Standard.flf",
+      "node_modules/figlet/fonts/Big.flf",
+      "node_modules/figlet/fonts/Slant.flf",
+      "node_modules/figlet/fonts/Doom.flf",
+      "node_modules/figlet/fonts/Banner3.flf"
+    ],
+    "scripts": [
+      "src/**/*.js"
+    ]
+  }
+}

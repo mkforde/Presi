@@ -1,0 +1,32 @@
+title = "Introduction to presi"
+author = "Jane Doe"
+date = "2025-01-01"
+text = "Welcome"
+speaker_notes = "Welcome everyone. Today we will walk through the presi presentation tool and its key features."
+
+[slides.1]
+text = "The Problem"
+speaker_notes = "Slides with too much content lose the audience. Presenters read from their slides instead of engaging."
+
+[slides.2]
+text = "Takahashi"
+speaker_notes = "The Takahashi Method uses very large text — one idea per slide. Forces clarity, keeps audience focused on the speaker."
+
+[slides.3]
+text = "Less Is More"
+speaker_notes = "Each slide is a single word or short phrase. The presenter provides all context verbally."
+
+[slides.4]
+text = "Live Demo"
+speaker_notes = "Split the terminal. Run presi on one side, live demo on the other. The presentation does not get in the way."
+
+[slides.5]
+text = "Try It"
+speaker_notes = "Open a terminal and run: presi example.toml"
+
+[style]
+font = "doom"
+slide_font_size = 48
+speaker_note_size = 14
+primary_color = "#00ff00"
+secondary_color = "#888888"
